@@ -65,3 +65,14 @@
     right: 45px;
 }
 
+.post-text-area {
+    width:70%;
+    background-color: $light;
+    border: none;
+    outline: none;
+}
+
+.post-edit {
+    background-color: white;
+    border: 1px solid $orange;
+}

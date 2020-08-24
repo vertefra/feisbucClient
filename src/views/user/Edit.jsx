@@ -9,7 +9,7 @@ import Layout from '../components/Layout.jsx'
 import Navbar from '../components/Navbar.jsx'
 import { Context } from '../../services/store.js'
 import ErrorPage from '../static/Error.jsx'
-import { updateUser } from '../../services/requests.js'
+import { updateUser, uploadPhoto } from '../../services/requests.js'
 
 
 const Edit = (props) => {
@@ -28,12 +28,12 @@ const Edit = (props) => {
     const [first_name, setFirstName ] = useState(state.first_name)
     const [last_name, setLastName ] = useState(state.last_name)
     const [city, setCity ] = useState(state.city)
+    const [profilePicture, setProfilePicture ] = useState(undefined)
     const id = props.match.params.id 
 
     // Handlers
 
     const handleNameChange = (e) => {
-        console.log(e)
         setFirstName(e.target.value)
     }
 
@@ -45,21 +45,42 @@ const Edit = (props) => {
         setCity(e.target.value)
     }
 
+    // fileloader
+
+    const handleLoadFile = (e) => {
+        // console.log(e.target.files[0])
+        setProfilePicture(e.target.files[0])
+    }
+
     const handleSubmitEdit = (e) => {
         e.preventDefault()
-        const updateObj = {first_name, last_name, city}
         if(state.isLogged){
-            updateUser(state.id, updateObj, (err, data) =>{
-                if(err){
-                    console.log(err)
-                    setError(err)
+            const imageFile = new FormData()
+            imageFile.append('image',profilePicture, 'picture name')
+            uploadPhoto(imageFile, (err, data)=>{
+                if(data){
+                    console.log(data.imageUrl)
+                    const updateObj = {
+                                        profile_img: data.imageUrl,
+                                        first_name, 
+                                        last_name, 
+                                        city}
+                                        
+                    updateUser(state.id, updateObj, (err, data) =>{
+                        if(err){
+                            console.log(err)
+                            setError(err)
+                        } else {
+                            console.log('working here')
+                            dispatch({ type: 'LOAD_USER', payload: data})
+                            dispatch({ type: 'IS_LOGGED', payload: true})
+                            setRedirect(`/user/${state.id}`)
+                        }
+                    })
                 } else {
-                    console.log('working here')
-                    dispatch({ type: 'LOAD_USER', payload: data})
-                    dispatch({ type: 'IS_LOGGED', payload: true})
-                    setRedirect(`/user/${state.id}`)
+                    console.log(err)
                 }
-            } )
+            })
         }
     }
 
@@ -87,7 +108,11 @@ const Edit = (props) => {
                                 />
                             </figure>
                             <label>Upload an Image for profile</label><br/>
-                            <input type="file"/>
+                            <input 
+                                type="file"
+                                onChange={handleLoadFile}
+                                id="upload-input" 
+                            />
                         </fieldset>
                         <fieldset>
                             <legend>Info </legend>

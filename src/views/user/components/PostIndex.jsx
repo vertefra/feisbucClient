@@ -10,11 +10,16 @@ const PostIndex = (props) => {
     const [ visitedUser, setVisitedUser] = useState(undefined)
     const [ posts, setPosts ] = useState([])
 
+    // receives the new posts after the delete request from the postShow, rerendering 
+    // the remaining one. Could be more efficient? 
+
     const handleRenderAfterDelete = (posts) => {
-        console.log('posts after delete', posts.posts.posts)
         setPosts(posts.posts.posts)
     }
     
+    // this useEffect should check if you are the owner of the profile that you are visiting.
+    // if so it will grant you editin and deleting capabilities
+
     useEffect(() =>{
         setVisitedUser(props.visitedUser)
         const {isOwner, state} = props

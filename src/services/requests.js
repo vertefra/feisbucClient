@@ -2,7 +2,10 @@
 
 // requirements
 
-const server = 'http://127.0.0.1:3001'
+const dev = 'http://127.0.0.1:3001'
+const prod =  "https://feisbucserver.herokuapp.com"
+
+const server = dev
 var bcrypt = require('bcryptjs');
 
 
@@ -22,6 +25,18 @@ const fetchAPI = async (endPoint, method, data) => {
     }
     if(data){
         payload.body = JSON.stringify(data)
+    }
+    const response = await fetch(URL, payload)
+    return response.json()
+}
+
+const fetchPhotoAPI = async (endPoint, method, data) => {
+    const URL = server + endPoint
+    const payload = {
+        method: method,
+        mode: 'cors',
+        cache: 'no-cache',
+        body: data
     }
     const response = await fetch(URL, payload)
     return response.json()
@@ -149,12 +164,34 @@ const toggleLike = (userId, visitedProfileId, postId, cb) => {
     })
 }
 
+const updatePost = (postOwnerId, postId, postContent, cb) => {
+    fetchAPI(`/user/${postOwnerId}/posts/${postId}/edit`, 'PUT', {postContent}).then(data=>{
+        return cb(undefined, data)
+    }).catch(err=>{
+        console.log('ERROR HERE: ', err)
+        return cb(err, undefined)
+    })
+}
+
+// PICTURE REQUESTS
+
+const uploadPhoto = async (photoFile, cb) => {
+    console.log('FOTO FILE BEFORE SENDING TO THE SERVER ', photoFile)
+    fetchPhotoAPI('/images', 'POST', photoFile).then(data=>{
+        return cb(undefined, data)
+    }).catch(err=>{
+        return cb(err, undefined)
+    })
+}
+
 export {
     deletePost, 
     addNewPost,
     loadPosts,
-    registerUser, 
-    requestUserInfo, 
+    registerUser,
+    updatePost, 
+    requestUserInfo,
+    uploadPhoto, 
     toggleLike,
     userLogin, 
     updateUser, 

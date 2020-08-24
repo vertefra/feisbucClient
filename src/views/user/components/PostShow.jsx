@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { datetimeOptions } from '../../../services/utils.js'
-import { toggleLike, deletePost } from '../../../services/requests.js'
+import { toggleLike, deletePost, updatePost } from '../../../services/requests.js'
 import { Context } from '../../../services/store.js'
 
 const PostShow = (props) => {
@@ -9,12 +9,22 @@ const PostShow = (props) => {
 
     const [ state, dispatch ] = useContext(Context)
     const [ likes, setLikes ] = useState(post.likes)
+    const [ postContent, setPostContent ] = useState('')
+    const [ editMode, setEditMode ] = useState(false)
+    const [ postClassName, setPostClassName ] = useState('post-text-area')
+
+
     const d = new Date(post.createdAt)
     // date time formatting options
     
     const formattedTimestamp = d.toLocaleDateString('en-EN',datetimeOptions)
     const isOwner = props.isOwner
     const postId = props.id
+
+    const handlePostEdit = (e) => {
+        console.log(e.target.value)
+        setPostContent(e.target.value)
+    }
 
     const handleLikeButton = (e) => {
         const postId = e.target.id
@@ -39,19 +49,41 @@ const PostShow = (props) => {
         })
     }
 
-    const handleEditButton = (e) => {
-        console.log('edit', e.target.id)
+    const toggleEditMode = (e) => {
+        const mode = editMode ? false : true
+        const className = mode ? 'post-text-area post-edit' : 'post-text-area'
+        setEditMode(mode)
+        setPostClassName(className)
+        if(!mode){
+            const postId = e.target.id
+            updatePost(state.id, postId, postContent, (err, data)=>{
+                if(data){
+                    console.log(data)
+                } else {
+                    console.log(err)
+                }
+            })
+        }
     }
 
     useEffect(()=>{
-        console.log('rerendering')
-    })
+        setPostContent(post.content)
+    }, [])
 
     return(
         <div className='post light-back'>
-            <p>"{post.content}"</p>
+            <input
+                type="textarea"
+                value={postContent}
+                onChange={handlePostEdit}
+                readOnly={!editMode}
+                className={postClassName}
+            />
             {
-                isOwner && 
+                isOwner &&
+                
+                    // THESE ARE ALL THE BUTTONS RENDERED ONLY IF ONWNER IS TRUE
+
                     <div>
                         <button 
                             id={postId}
@@ -59,13 +91,32 @@ const PostShow = (props) => {
                             onClick={handleDeleteButton}
                         >X</button>
 
-                        <button 
+                {
+
+                // TOGGLE THE BUTTON FOR EDIT MODE AND SET THE INPUT FIELD TO READONLY TRUE OR FALSE
+                
+                editMode ? 
+                        <button
+                            className="editButton"
                             id={postId}
-                            className="editButton" onClick={handleEditButton}>
+                            onClick={toggleEditMode}
+                        ><img 
+                            src='/icons/save.svg'
+                        /> 
+                        </button>  
+                        :<button 
+                            id={postId}
+                            className="editButton" 
+                            onClick={toggleEditMode}>
                             <img
                                 src='/icons/edit.svg'
                             />
                         </button>
+                
+                // END EDIT/SAVE BUTTONS 
+                
+                }
+                
                     </div>
             }
             <footer>
