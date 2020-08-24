@@ -1,0 +1,13 @@
+@import '../Style.scss';
+
+.edit-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-post > input{
+    width: 80%;
+    height: $sz-small;
+    margin: $sp-small 0;
+}

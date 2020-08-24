@@ -1,0 +1,171 @@
+@import "./modules/Access";
+@import "./modules/Navbar.scss";
+@import "./user/Show.scss";
+@import "./user/Edit.scss";
+@import "./modules/FriendCard.scss";
+@import "./user/Index.scss";
+@import "./modules/PostInput.scss";
+@import "./posts/Post.scss";
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+img {
+    pointer-events: none;
+}
+
+#wrapper{
+    max-width: 100vw;
+    background-color: $light;
+}
+
+fieldset{
+    width:80%;
+    height: $sz-large;
+    border: 1px $orange solid;
+    background-color: $light;
+    padding: $sp-medium;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: $dark;
+}
+
+legend{
+    color: $dark;
+    font-size: $fmedium;
+    margin-left: $sp-medium;
+    font-weight: 900;
+}
+
+// custom styles
+
+.dark-icon {
+    background-color: $dark;
+    height: 13px;
+    margin: 0 $sp-xsmall;
+}
+
+.button-primary, .button-secondary{
+    background-color: $dark;
+    color: $light;
+    padding: $sp-small $sp-large;
+    margin: $sp-small;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.button-secondary{
+    padding: $sp-xsmall $sp-large;   
+    max-height: 30px;
+    border-radius: 5px;
+    width: $sz-large;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container{
+    width: 90%;
+    min-height: 90vh;
+    padding: $sp-small;
+    margin: 0 auto;
+}
+
+section{
+    background-color: $dark;
+    color: $light;
+    border: 2px solid $darker;
+    border-radius: 5px;
+    padding: $sp-small;
+    margin: $sp-medium;
+}
+
+// card style 
+
+.card {
+    background-color: $dark;
+    border: 2px solid $darker;
+    border-radius: 5px;
+    margin: $sp-small;
+    padding: $sp-medium;
+    max-width: $sz-medium;
+    color: $light;
+    font-family: $openSans;
+    font-size: $fsmall;
+    text-align: center;
+}
+
+.card-username {
+    background-color: $light;
+    color: $dark;
+    border: 1px solid $orange;
+    border-radius: 5px;
+    margin: $sp-xsmall 0;
+}
+
+.card-name, .card-city {
+    margin: $sp-xsmall 0;
+    font-family: $roboto;
+    font-size: $fxsmall;
+    text-transform: capitalize;
+}
+
+.card-city {
+    text-decoration: underline;
+    margin-top: $sp-small;
+
+}
+
+
+// end card style
+
+.main-name {
+    font-size: $flarge;
+    margin: $sp-small auto;
+}
+
+.profile-pic{
+    border-radius: 50%;
+    border: 1px solid $light;
+}
+
+.dark-border {
+    border: 1px solid $darker;
+}
+
+.light-border {
+    border: 1px solid $light;
+}
+
+.light-back {
+    background-color: $light;
+    color: $darker;
+}
+
+.dark-back {
+    background-color: $dark;
+    color: $light;
+}
+
+
+.flash{
+    background-color: $orange;
+    width: 70%;
+    margin: $sp-xsmall auto;
+    font-family: $openSans;
+    text-transform: capitalize;
+    font-size: $fsmall;
+    padding: $sp-small;
+    border-radius: 5px;
+    text-align: center;
+
+}

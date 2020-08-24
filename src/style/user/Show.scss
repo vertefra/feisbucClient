@@ -1,0 +1,17 @@
+@import '../Style.scss';
+
+
+
+.profile-container header{
+    font-family: $roboto;
+    font-size: $fmedium;
+    text-align: center;
+    margin: $sp-small auto;
+}
+
+
+
+.profile-ctr-btn{
+    display: flex;
+}
+

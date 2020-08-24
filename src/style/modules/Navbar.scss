@@ -1,0 +1,47 @@
+@import '../Style.scss';
+
+.navbar{
+    min-width: 375px;
+    width: 90%;
+    background-color: $dark;
+    margin: 0 auto;
+}
+
+.navbar ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: $sp-xlarge;
+}
+
+.navbar li{
+    font-family: $roboto;
+    width: $sz-medium;
+    margin: $sp-small;
+    border-radius: 5px;
+    text-align: center;
+    font-size: $fsmall;
+}
+
+.icon {
+    background-color: $light;
+}
+
+#username, #logout-btn {
+    position: absolute;
+    top:5px;
+    left:5px;
+    color: $light;
+    background-color: transparent;
+}
+
+#logout-btn {
+    right: 0;
+    left: 66%;
+    padding: $sp-small;
+    margin: 0;
+}
+
+#logout-btn > button {
+    background-color: none;
+}

@@ -1,0 +1,41 @@
+@import '../Style.scss';
+
+#access-title{
+    font-family: $roboto;
+    font-size: $fmedium;
+    margin: $sp-medium auto;
+    padding: $sp-large;
+    background-color: $dark;
+    color: $light;
+}
+
+
+#tagline{
+    font-size: $fmedium;
+}
+
+.entry-page{
+    background-image: url('/img/front_back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    width: 90%;
+    margin: 0 auto;
+    color: $dark;
+    font-family: $roboto;
+    padding: 0 $sp-large;
+}
+
+.form-field{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: $roboto;
+    font-size: $fxsmall;
+}
+
+.access-input{
+    width: $sz-large;
+    margin: $sp-xsmall;
+}
+
