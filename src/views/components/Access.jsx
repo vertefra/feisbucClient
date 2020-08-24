@@ -1,11 +1,11 @@
 // src/views/components/Form.jsx
 
-import React, { useState } from 'react'
-import { useEffect } from 'react'
 import { registerUser, userLogin } from '../../services/requests.js'
-import { useContext } from 'react'
 import { Context } from '../../services/store.js'
 import { Redirect } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useContext } from 'react'
+import { useEffect } from 'react'
 
 const Access = (props) => {
 
@@ -75,10 +75,10 @@ const Access = (props) => {
         userLogin(usrLogin, pswLogin, (err, data)=>{
             if(err){
                 console.log(err)
-                // setting state and redirect for page error
-                setRedirect('/error') // set redirect to error page
+                                            // setting state and redirect for page error
+                setRedirect('/error')       // set redirect to error page
                 setError(err)
-                dispatch({ type:'SET_AUTH', payload: true}) // in order to trigger useEffect redirect
+                dispatch({ type:'SET_AUTH', payload: true})     // in order to trigger useEffect redirect
                 dispatch({ type: "IS_LOGGED", payload: false})  // don't have access to anything
             } else {
                 console.log(data)

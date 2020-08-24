@@ -5,7 +5,7 @@
 const dev = 'http://127.0.0.1:3001'
 const prod =  "https://feisbucserver.herokuapp.com"
 
-const server = dev
+const server = prod
 var bcrypt = require('bcryptjs');
 
 
@@ -176,7 +176,6 @@ const updatePost = (postOwnerId, postId, postContent, cb) => {
 // PICTURE REQUESTS
 
 const uploadPhoto = async (photoFile, cb) => {
-    console.log('FOTO FILE BEFORE SENDING TO THE SERVER ', photoFile)
     fetchPhotoAPI('/images', 'POST', photoFile).then(data=>{
         return cb(undefined, data)
     }).catch(err=>{

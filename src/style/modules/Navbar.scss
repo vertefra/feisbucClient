@@ -1,10 +1,10 @@
 @import '../Style.scss';
 
 .navbar{
-    min-width: 375px;
     width: 90%;
     background-color: $dark;
     margin: 0 auto;
+    position: relative;
 }
 
 .navbar ul{
@@ -29,19 +29,38 @@
 
 #username, #logout-btn {
     position: absolute;
-    top:5px;
-    left:5px;
+    top: 0;
     color: $light;
     background-color: transparent;
 }
 
+#username {
+    left: 0;
+}
+
 #logout-btn {
     right: 0;
-    left: 66%;
-    padding: $sp-small;
-    margin: 0;
+    background-color: $light;
+    cursor: pointer;
+    padding: 2px;
+}
+
+#logout-btn button{
+    background-color: $light;
+    border: none;
 }
 
 #logout-btn > button {
     background-color: none;
+}
+
+@media only screen and (min-width: 600px) {
+    .navbar{
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #logout-btn{
+        padding: $sp-xsmall;
+    }
 }

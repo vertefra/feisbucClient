@@ -15,8 +15,6 @@ const defaultState = {
     favouriteFoods: [],
 }
 
-
-
 const Reducer = (state, action) => {
     switch(action.type){
         case 'SET_ID':

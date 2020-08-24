@@ -12,7 +12,6 @@ const PostInput = (props) => {
     }
 
     const handlePostSubmit = (e) =>{
-        console.log('sending=>', state.id, post)
         addNewPost(state.id, post, (err, data)=>{
             if(data){
                 requestUserInfo(state.id, (err, data)=>{

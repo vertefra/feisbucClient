@@ -17,7 +17,6 @@ const Edit = (props) => {
     // error state redirect state global state
 
     const [ redirect, setRedirect ] = useState(undefined)
-    const [ error, setError ] = useState(undefined)
 
     // upload pic state
 
@@ -48,7 +47,6 @@ const Edit = (props) => {
     // fileloader
 
     const handleLoadFile = (e) => {
-        // console.log(e.target.files[0])
         setProfilePicture(e.target.files[0])
     }
 
@@ -59,7 +57,6 @@ const Edit = (props) => {
             imageFile.append('image',profilePicture, 'picture name')
             uploadPhoto(imageFile, (err, data)=>{
                 if(data){
-                    console.log(data.imageUrl)
                     const updateObj = {
                                         profile_img: data.imageUrl,
                                         first_name, 
@@ -69,9 +66,7 @@ const Edit = (props) => {
                     updateUser(state.id, updateObj, (err, data) =>{
                         if(err){
                             console.log(err)
-                            setError(err)
                         } else {
-                            console.log('working here')
                             dispatch({ type: 'LOAD_USER', payload: data})
                             dispatch({ type: 'IS_LOGGED', payload: true})
                             setRedirect(`/user/${state.id}`)

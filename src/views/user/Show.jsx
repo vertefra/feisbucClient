@@ -1,34 +1,25 @@
 // src/view/user/Show.jsx
 
 import React, { useContext, useEffect, useState } from 'react'
-import Layout from '../components/Layout.jsx'
-import Navbar from '../components/Navbar.jsx'
-import { Context } from '../../services/store.js'
-import ErrorPage from '../static/Error.jsx'
 import { requestUserInfo } from '../../services/requests.js'
+import { Context } from '../../services/store.js'
 import { Redirect } from 'react-router-dom'
+
+import PostIndex from './components/PostIndex.jsx'
 import FolloBtn from '../components/FollowBtn.jsx'
 import PostInput from './components/PostInput.jsx'
-import PostIndex from './components/PostIndex.jsx'
+import Layout from '../components/Layout.jsx'
+import Navbar from '../components/Navbar.jsx'
+import ErrorPage from '../static/Error.jsx'
 
 const Show = (props) => {
 
-    // error state and redirect state
-
     const [ redirect, setRedirect ] = useState(undefined)
     const [ error, setError ] = useState(undefined)
-
-    // global State and state of the visited profile
-
-    const visitedProfileId = props.match.params.id
-
-    // visitedUser Match the id profile of the url. If you are the owner check
-    // the state id and set owner = true if is the same
-    
     const [ visitedUser, setVisitedUser ] = useState({})
     const [ state, dispatch ] = useContext(Context)
 
-    // HANDLERS 
+    const visitedProfileId = props.match.params.id
 
     const handleEdit = () => {
         setRedirect(`/user/${state.id}/edit`)
@@ -42,7 +33,6 @@ const Show = (props) => {
                 console.log(err)
                 setError('Authentication failed')
             } else {
-                // console.log(data)
                 dispatch({ type: 'LOAD_USER', payload:data})
                 dispatch({ type: 'IS_LOGGED', payload:true})
             }
@@ -74,22 +64,21 @@ const Show = (props) => {
             setRedirect('/error')
         }
         if(!error && redirect){
-            console.log('redirecting')
         } 
     }, [error, redirect])
 
     const { id, last_name, first_name, city, profile_img } = visitedUser
 
-    // check if the user is the profile owner
+    // check if the user is the profile owner //
 
     const isOwner = state.id===id && state.isLogged ? true : false
 
-    // check if is friend to determin if the button should be follow or unfollow
+    // check if is friend to determin if the button should be follow or unfollow //
     
     return(
         <Layout>
             {state.isLogged ? 
-            <div>
+            <div className="profile-container">
                 { redirect && <Redirect from='/user/:id' to={`${redirect}`}/> }
                 <Navbar></Navbar>
                 <div className="profile-container">
@@ -100,13 +89,9 @@ const Show = (props) => {
                         Check if the id in state is equal to the id of the visiting profile 
                         and the profile is logged print a edit button otherwise check if 
                         the profile is in my friends. if not print a button to follow
+                        follow button will look in the friends if the id is present 
                 
                     */}
-
-                    {/* 
-                        follow button will look in the friends if the id is present 
-                    */}
-
                             <figure>
                                 <img
                                     className="profile-pic dark-border" 

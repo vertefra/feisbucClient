@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useContext } from 'react'
-import PostShow from './PostShow'
 import { loadPosts } from '../../../services/requests'
-import { Context } from '../../../services/store'
+import React, { useEffect, useState } from 'react'
 
-// Show all the post. If owner===true show also an edit post button
+import PostShow from './PostShow'
+
+// Show all the post. If owner===true show also an edit post button //
 
 const PostIndex = (props) => {
 
     const [ visitedUser, setVisitedUser] = useState(undefined)
     const [ posts, setPosts ] = useState([])
 
-    // receives the new posts after the delete request from the postShow, rerendering 
-    // the remaining one. Could be more efficient? 
+    // receives the new posts after the delete request from the postShow,
+    // rerendering the remaining one. Could this be more efficient? 
 
     const handleRenderAfterDelete = (posts) => {
         setPosts(posts.posts.posts)
@@ -22,7 +22,7 @@ const PostIndex = (props) => {
 
     useEffect(() =>{
         setVisitedUser(props.visitedUser)
-        const {isOwner, state} = props
+        const { isOwner } = props
         if(isOwner){
             loadPosts(props.state.id, (err, data)=>{
                 if(data){
@@ -35,9 +35,8 @@ const PostIndex = (props) => {
             const id = props.visitedUser.id
             loadPosts(id, (err, data)=>{
                 if(data){
-                    // this was hell... still don't know exactly how I did it
-                    setPosts(data.posts)
-                } else {
+                    setPosts(data.posts)        // this was hell... still don't know exactly
+                } else {                        // how I did it Arthur, explain me Hooks!!
                     console.log(err)
                 }
             }) 

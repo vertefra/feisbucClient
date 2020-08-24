@@ -1,28 +1,24 @@
+import { toggleLike, deletePost, updatePost } from '../../../services/requests.js'
 import React, { useContext, useState, useEffect } from 'react'
 import { datetimeOptions } from '../../../services/utils.js'
-import { toggleLike, deletePost, updatePost } from '../../../services/requests.js'
 import { Context } from '../../../services/store.js'
 
 const PostShow = (props) => {
 
     const post = props.post
 
-    const [ state, dispatch ] = useContext(Context)
+    const [ postClassName, setPostClassName ] = useState('post-text-area')
+    const [ state ] = useContext(Context)
     const [ likes, setLikes ] = useState(post.likes)
     const [ postContent, setPostContent ] = useState('')
     const [ editMode, setEditMode ] = useState(false)
-    const [ postClassName, setPostClassName ] = useState('post-text-area')
-
 
     const d = new Date(post.createdAt)
-    // date time formatting options
-    
     const formattedTimestamp = d.toLocaleDateString('en-EN',datetimeOptions)
     const isOwner = props.isOwner
     const postId = props.id
 
     const handlePostEdit = (e) => {
-        console.log(e.target.value)
         setPostContent(e.target.value)
     }
 

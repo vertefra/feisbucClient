@@ -16,10 +16,10 @@ const FriendIndex = (props) => {
     const nOfFriends = state.friends.length
 
     useEffect(()=>{
-        if(state.isLogged){     // set this at the beginning of every page 
+        if(state.isLogged){     
             requestUserInfo(state.id, (err, data)=>{
                 if(data){
-                    dispatch({type:'LOAD_USER', payload: data})
+                    // dispatch({type:'LOAD_USER', payload: data})
                     dispatch({type:'IS_LOGGED', payload: true})
                 } else {
                     console.log(err) // TODO SET REDIRECT PAGE
@@ -45,9 +45,11 @@ const FriendIndex = (props) => {
             <Navbar></Navbar>
             <div className="profile-container">
                 <h2 class="flash">you have {nOfFriends} friends</h2>
+                <div className="friend-showcase">
                 {friends.map(friend=>{
                     return <FriendCard key={friend.id}friend={friend} />
                 })}
+                </div>
             </div>
         </Layout>
     )

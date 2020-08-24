@@ -169,3 +169,15 @@ section{
     text-align: center;
 
 }
+
+@media only screen and (min-width: 600px) {
+
+    #wrapper {
+        width:90%;
+        margin: 0 auto;
+    }
+    .profile-container{
+        width: 80%;
+        margin: 0 auto;
+    }
+}
