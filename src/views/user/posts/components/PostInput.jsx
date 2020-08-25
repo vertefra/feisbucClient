@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { addNewPost, requestUserInfo } from '../../../services/requests'
-import { Context } from '../../../services/store'
+import { addNewPost, requestUserInfo } from '../../../../services/requests'
+import { Context } from '../../../../services/store'
+
+// Text area where to write the content of the post
 
 const PostInput = (props) => {
 

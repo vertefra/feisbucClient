@@ -5,9 +5,9 @@ import { requestUserInfo } from '../../services/requests.js'
 import { Context } from '../../services/store.js'
 import { Redirect } from 'react-router-dom'
 
-import PostIndex from './components/PostIndex.jsx'
+import PostIndex from './posts/PostIndex.jsx'
 import FolloBtn from '../components/FollowBtn.jsx'
-import PostInput from './components/PostInput.jsx'
+import PostInput from './posts/components/PostInput.jsx'
 import Layout from '../components/Layout.jsx'
 import Navbar from '../components/Navbar.jsx'
 import ErrorPage from '../static/Error.jsx'
@@ -99,11 +99,11 @@ const Show = (props) => {
     
     return(
         <Layout>
+            <Navbar></Navbar>
             {state.isLogged ? 
             <div className="profile-container">
                 { redirect && <Redirect from='/user/:id' to={`${redirect}`}/> }
-                <Navbar></Navbar>
-                <div className="profile-container">
+                {/* <div className="profile-container"> */}
                     <header>
                             <h1 className="main-name">{first_name} {last_name}</h1>
 
@@ -159,7 +159,7 @@ const Show = (props) => {
                             visitedUser={visitedUser}
                         />
                     </section>
-                </div>
+                {/* </div> */}
             </div>
             : <ErrorPage error="not logged"/>}
         </Layout>

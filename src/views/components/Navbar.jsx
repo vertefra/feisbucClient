@@ -28,7 +28,7 @@ return (
                             ></img>
                     </li>
                 </Link>
-                <Link to={`/user/${state.id}`}>
+                <Link to={`/user/${state.id}/posts`}>
                     <li className='icon light-shadow'>
                             <img
                                 src='/icons/home.svg'

@@ -12,5 +12,4 @@ const createSession = (userId) => {
 }
 
 
-
 export { datetimeOptions, createSession }

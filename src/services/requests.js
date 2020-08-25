@@ -5,7 +5,7 @@
 const dev = 'http://127.0.0.1:3001'
 const prod =  "https://feisbucserver.herokuapp.com"
 
-const server = prod
+const server = dev
 var bcrypt = require('bcryptjs');
 
 
@@ -172,6 +172,15 @@ const updatePost = (postOwnerId, postId, postContent, cb) => {
     })
 }
 
+const getFeed = (userId, cb) => {
+    // we call the get route of posts with a mode=feed
+    fetchAPI(`/user/${userId}/posts?mode=feed`, "GET").then(data=>{
+        return cb(undefined, data)
+    }).catch(err=>{
+        return cb(err, undefined)
+    })
+}
+
 // PICTURE REQUESTS
 
 const uploadPhoto = async (photoFile, cb) => {
@@ -183,6 +192,7 @@ const uploadPhoto = async (photoFile, cb) => {
 }
 
 export {
+    getFeed,
     deletePost, 
     addNewPost,
     loadPosts,
