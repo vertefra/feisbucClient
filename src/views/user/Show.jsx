@@ -96,6 +96,7 @@ const Show = (props) => {
                                 <img
                                     className="profile-pic dark-border" 
                                     width={'100px'}
+                                    height={'100px'}
                                     src={profile_img} 
                                     alt="profile pic"
                                 />

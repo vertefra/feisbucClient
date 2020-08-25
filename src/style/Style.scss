@@ -7,6 +7,7 @@ $green: rgba(56, 67, 37, 1);
 $brown: #483828;
 $orange: #FD9C60;
 $light: #E5EDEF;
+$lessLight: #7f8a8d;
 
 $fxsmall: 10px;
 $fsmall: 13px;
@@ -25,3 +26,41 @@ $sz-large:150px;
 
 $roboto:  'Roboto Mono', monospace;
 $openSans: 'Open Sans', sans-serif;
+
+// animation and transition
+
+.light-shadow{
+    transition: ease-in-out 0.2s;
+}
+
+.light-shadow:hover{
+    color: $dark;
+    background-color: $lessLight;
+    transition: ease-in-out 0.3s;
+}
+
+.appear {
+    opacity: 0;
+    animation: moveAndAppear 0.5s 0.2s forwards;
+}
+
+.scale {
+    transform: scale(1);
+    transition: ease-in-out 0.2s;
+}
+
+.scale:hover{
+    transform: scale(1.1);
+}
+
+@keyframes moveAndAppear {
+    0% {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+

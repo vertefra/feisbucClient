@@ -33,6 +33,7 @@ const FollowBtn = (props) => {
                 } else {
                     console.log(err)
                 }
+        
             })
         } else {
             // otherwise unfollow user
@@ -58,10 +59,10 @@ const FollowBtn = (props) => {
     return(
     <button 
         onClick={handleFollow}
-        className="button-secondary"
+        className="button-secondary light-shadow"
         >
         <img
-            className='dark-icon'
+            className='dark-icon light-shadow'
             src='/icons/add.svg'
         />
             {follow && 'unfollow' || 'follow'}</button>

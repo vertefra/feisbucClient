@@ -102,7 +102,7 @@ const PostShow = (props) => {
                         </button>  
                         :<button 
                             id={postId}
-                            className="editButton" 
+                            className="editButton " 
                             onClick={toggleEditMode}>
                             <img
                                 src='/icons/edit.svg'
@@ -122,7 +122,7 @@ const PostShow = (props) => {
                 <div className="likes">
                     <button
                         id={postId} 
-                        className="like-button dark-back" 
+                        className="like-button dark-back light-shadow" 
                         onClick={handleLikeButton}>
                         <img src="/icons/like.svg" alt="like"/>
                         {likes}

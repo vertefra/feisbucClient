@@ -4,15 +4,15 @@ import { Link } from "react-router-dom"
 const FriendCard = (props) =>{
     const friend = props.friend
     const id = friend._id ? friend._id : friend.id
-    console.log(friend)
     return(
-        <div className="card">
+        <div className="card appear scale">
             <Link to={`/user/${id}`}>
                 <figure>
                     <img
-                        className="profile-pic" 
+                        className="profile-pic " 
                         src={friend.profile_img}
                         width='80px'
+                        height="80px"
                         alt='img profile'
                     />
                 </figure>

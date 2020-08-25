@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Context } from '../../services/store';
 
 const Navbar = (props) => {
@@ -16,47 +16,50 @@ const handleLogOut = () => {
 
 return (
     <nav className="navbar">
-        <ul>
-            <li className='icon'>
+        { 
+            redirect ? <Redirect to={redirect}/> : 
+            <ul>
                 <Link to={`/user/${state.id}`}>
-                    <img
-                        src='/icons/my-profile.svg'
-                        alt="my profile"
-                    ></img>
+                    <li className='icon light-shadow'>
+                            <img
+                                src='/icons/my-profile.svg'
+                                alt="my profile"
+                            ></img>
+                    </li>
                 </Link>
-            </li>
-            <li className='icon'>
                 <Link to={`/user/${state.id}`}>
-                    <img
-                        src='/icons/home.svg'
-                        alt='home'
-                    />    
+                    <li className='icon light-shadow'>
+                            <img
+                                src='/icons/home.svg'
+                                alt='home'
+                            />    
+                    </li>
                 </Link>
-            </li>
-            <li className='icon'>
                 <Link to={`/user/${state.id}/friends`}>
+                <li className='icon light-shadow'>
                     <img
                         src='/icons/friends.svg'
                         alt="my friends"
                     />    
+                </li>
                 </Link>
-            </li>
-            <li className='icon'>
                 <Link to={`/user`}>
-                    <img
-                        src='/icons/search-friend.svg'
-                        alt='add friend'
-                    />
+                    <li className='icon light-shadow'>
+                        <img
+                            src='/icons/search-friend.svg'
+                            alt='add friend'
+                        />
+                    </li>
                 </Link>
-            </li>
-            <li id="username">
-                <h5>Logged as {state.username}</h5>
-            </li>
-            <li id="logout-btn">
-                <button onClick={handleLogOut}>log out</button>
-            </li>
+                <li id="username">
+                    <h5>Logged as {state.username}</h5>
+                </li>
+                <li id="logout-btn">
+                    <button onClick={handleLogOut}>log out</button>
+                </li>
 
-        </ul>
+            </ul> 
+        }
     </nav>
     );
 }
