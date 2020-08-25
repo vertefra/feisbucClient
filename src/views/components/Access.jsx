@@ -1,6 +1,7 @@
 // src/views/components/Form.jsx
 
 import { registerUser, userLogin } from '../../services/requests.js'
+import { createSession } from '../../services/utils.js'
 import { Context } from '../../services/store.js'
 import { Redirect } from 'react-router-dom'
 import React, { useState } from 'react'
@@ -63,6 +64,7 @@ const Access = (props) => {
                 dispatch({ type: 'SET_ID', payload: undefined})
                 dispatch({ type: 'IS_AUTH', payload: false})
             } else {
+                
                 dispatch({ type: 'SET_ID', payload:user_id})
                 dispatch({ type: 'IS_AUTH', payload: true})
                 dispatch({ type: 'IS_LOGGED', payload: true})
@@ -81,7 +83,7 @@ const Access = (props) => {
                 dispatch({ type:'SET_AUTH', payload: true})     // in order to trigger useEffect redirect
                 dispatch({ type: "IS_LOGGED", payload: false})  // don't have access to anything
             } else {
-                console.log(data)
+                createSession(data.id)
                 dispatch({ type: 'SET_ID', payload:data.id})
                 dispatch({ type: 'IS_AUTH', payload: true})
                 dispatch({ type: 'IS_LOGGED', payload: true})

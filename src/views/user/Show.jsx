@@ -42,7 +42,7 @@ const Show = (props) => {
     useEffect(()=>{
         if(state.isLogged){
 
-            // is the state isLogged gather the info about the user/id
+            // if the state isLogged gather the info about the user/id
             // and create an object to print the info in the page.
             // this will keep separate the user from other people that you
             // want to see the profile of. If the id are equal add a button
@@ -58,6 +58,28 @@ const Show = (props) => {
         }
         
     },[state.isLogged, visitedProfileId])
+
+
+    // THIS IS TO MAINTAIN THE SESSION ALSO AFTER A REFRESH
+
+    useEffect(()=>{
+        if(state.isLogged===false){
+            const userId = sessionStorage['user']
+            if(userId){
+                requestUserInfo(userId, (err, data)=>{
+                    if(data){
+                        dispatch({type:'LOAD_USER',payload:data})
+                        dispatch({type:'IS_LOGGED', payload:true})
+                    } else {
+                        console.log('error, cannot retrieve user info for id: ', userId)
+                    }
+                })
+            } else {
+                console.log('You are not logged in and you dont have a valid session')
+            }
+        }
+    },[])
+
 
     useEffect(()=>{
         if(error){

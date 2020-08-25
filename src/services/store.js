@@ -6,7 +6,7 @@ import React, { createContext, useReducer } from 'react'
 // APP STATE AND LOGIC HERE
 
 const initialState = {
-    id: '5f417ce8ec17016726f1a1ce',
+    id: undefined,
     first_name: undefined,
     last_name: undefined,
     username: undefined,
@@ -15,7 +15,7 @@ const initialState = {
     state: undefined,
     profile_img: undefined,
     isAdmin: false,
-    isLogged: true,
+    isLogged: false,
     isAuth: false,
     friends: [],
     posts: [],

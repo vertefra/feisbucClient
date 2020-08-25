@@ -15,8 +15,6 @@ const Index = (props) => {
     const [ state, dispatch] = useContext(Context)
     const [ searchFriend, setSearchFriend ] = useState('')
     const [ searchResult, setSearchResult ] = useState([])
-    // const [ redirect, setRedirect ] = useState(undefined)
-    // const [ error, setError ] = useState(undefined)
 
     // Handlers
 
@@ -32,18 +30,24 @@ const Index = (props) => {
         })        
     }
 
+    // THIS WILL MAINTAINE THE SESSION ALSO AFTER A REFRESH
+
     useEffect(()=>{
-        if(state.isLogged){     // set this at the beginning of every page 
-            requestUserInfo(state.id, (err, data)=>{
-                if(data){
-                    dispatch({type:'LOAD_USER', payload: data})
-                    dispatch({type:'IS_LOGGED', payload: true})
-                } else {
-                    console.log(err) // TODO SET REDIRECT PAGE
-                }
-            })
+        if(state.isLogged===false){
+            const userId = sessionStorage['user']
+            if(userId){
+                requestUserInfo(userId, (err, data)=>{
+                    if(data){
+                        dispatch({type:'LOAD_USER',payload:data})
+                        dispatch({type:'IS_LOGGED', payload:true})
+                    } else {
+                        console.log('error, cannot retrieve user info for id: ', userId)
+                    }
+                })
+            } else {
+                console.log('You are not logged in and you dont have a valid session')
+            }
         }
-        
     },[])
 
     useEffect(()=> {

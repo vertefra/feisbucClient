@@ -10,6 +10,7 @@ import Navbar from '../components/Navbar.jsx'
 import { Context } from '../../services/store.js'
 import ErrorPage from '../static/Error.jsx'
 import { updateUser, uploadPhoto } from '../../services/requests.js'
+import { requestUserInfo } from '../../services/requests.js'
 
 
 const Edit = (props) => {
@@ -24,15 +25,16 @@ const Edit = (props) => {
 
     // info state
 
-    const [first_name, setFirstName ] = useState(state.first_name)
-    const [last_name, setLastName ] = useState(state.last_name)
-    const [city, setCity ] = useState(state.city)
+    const [first_name, setFirstName ] = useState('')
+    const [last_name, setLastName ] = useState('')
+    const [city, setCity ] = useState('')
     const [profilePicture, setProfilePicture ] = useState(undefined)
     const id = props.match.params.id 
 
     // Handlers
 
     const handleNameChange = (e) => {
+        e.preventDefault()
         setFirstName(e.target.value)
     }
 
@@ -52,17 +54,17 @@ const Edit = (props) => {
 
     const handleSubmitEdit = (e) => {
         e.preventDefault()
-        if(state.isLogged){
+        if(state.isLogged && profilePicture){
             const imageFile = new FormData()
             imageFile.append('image',profilePicture, 'picture name')
             uploadPhoto(imageFile, (err, data)=>{
                 if(data){
                     const updateObj = {
-                                        profile_img: data.imageUrl,
-                                        first_name, 
-                                        last_name, 
-                                        city}
-                                        
+                        profile_img: data.imageUrl,
+                        first_name, 
+                        last_name, 
+                        city
+                    }              
                     updateUser(state.id, updateObj, (err, data) =>{
                         if(err){
                             console.log(err)
@@ -76,11 +78,44 @@ const Edit = (props) => {
                     console.log(err)
                 }
             })
+        } else if(state.isLogged) {
+            const updateObj = {
+                first_name,
+                last_name,
+                city
+            }
+            updateUser(state.id, updateObj, (err, data)=>{
+                if(err){
+                    console.log(err)
+                } else {
+                    dispatch({ type: 'LOAD_USER', payload: data})
+                    dispatch({ type: 'IS_LOGGED', payload: true})
+                    setRedirect(`/user/${state.id}`)
+                }
+            })
         }
     }
 
     useEffect(()=>{
-    })
+        if(state.isLogged===false){
+            const userId = sessionStorage['user']
+            if(userId){
+                requestUserInfo(userId, (err, data)=>{
+                    if(data){
+                        dispatch({type:'LOAD_USER',payload:data})
+                        dispatch({type:'IS_LOGGED', payload:true})
+                    } else {
+                        console.log('error, cannot retrieve user info for id: ', userId)
+                    }
+                })
+            } else {
+                console.log('You are not logged in and you dont have a valid session')
+            }
+        }
+        setFirstName(state.first_name)
+        setLastName(state.last_name)
+        setCity(state.city)
+    },[])
 
     return(
         <Layout>

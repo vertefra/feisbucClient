@@ -7,4 +7,10 @@ const datetimeOptions = {
     day: 'numeric'
 }
 
-export { datetimeOptions }
+const createSession = (userId) => {
+    sessionStorage['user'] = userId
+}
+
+
+
+export { datetimeOptions, createSession }

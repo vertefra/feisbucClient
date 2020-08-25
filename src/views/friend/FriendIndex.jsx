@@ -15,18 +15,24 @@ const FriendIndex = (props) => {
     const [ friends, setFriends ] = useState([])
     const nOfFriends = state.friends.length
 
+    // THIS WILL MAINTAINE THE SESSION ALSO AFTER A REFRESH
+
     useEffect(()=>{
-        if(state.isLogged){     
-            requestUserInfo(state.id, (err, data)=>{
-                if(data){
-                    // dispatch({type:'LOAD_USER', payload: data})
-                    dispatch({type:'IS_LOGGED', payload: true})
-                } else {
-                    console.log(err) // TODO SET REDIRECT PAGE
-                }
-            })
+        if(state.isLogged===false){
+            const userId = sessionStorage['user']
+            if(userId){
+                requestUserInfo(userId, (err, data)=>{
+                    if(data){
+                        dispatch({type:'LOAD_USER',payload:data})
+                        dispatch({type:'IS_LOGGED', payload:true})
+                    } else {
+                        console.log('error, cannot retrieve user info for id: ', userId)
+                    }
+                })
+            } else {
+                console.log('You are not logged in and you dont have a valid session')
+            }
         }
-        
     },[])
 
     useEffect(()=>{
@@ -44,7 +50,7 @@ const FriendIndex = (props) => {
         <Layout>
             <Navbar></Navbar>
             <div className="profile-container">
-                <h2 class="flash">you have {nOfFriends} friends</h2>
+                <h2 className="flash">you have {nOfFriends} friends</h2>
                 <div className="friend-showcase">
                 {friends.map(friend=>{
                     return <FriendCard key={friend.id}friend={friend} />

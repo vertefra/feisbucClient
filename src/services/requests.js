@@ -71,7 +71,6 @@ const userLogin = (username, password, cb) => {
     // return the cb function is the check is true with the user data
     // before, get rid of the password! :)
     fetchAPI(`/user?username=${username}`, "GET").then(data => {
-        console.log(data)
         bcrypt.compare(password, data.password).then((res)=>{
             if(res){
                 data.password=undefined

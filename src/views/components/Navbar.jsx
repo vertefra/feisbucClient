@@ -10,6 +10,7 @@ const [ error, setError ] = useState(undefined)
 
 const handleLogOut = () => {
     setRedirect('/')
+    sessionStorage['user'] = ''
     dispatch({ type: 'CLEAN_STATE', payload: true})
 }
 
