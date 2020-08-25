@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Context } from '../../services/store';
+import Modal from '../static/Modal';
 
 const Navbar = (props) => {
 
@@ -18,7 +19,7 @@ const handleLogOut = () => {
 return (
     <nav className="navbar">
         { 
-            redirect ? <Redirect to={redirect}/> : 
+            redirect ? <Redirect to={redirect}/> :
             <ul>
                 <Link to={`/user/${state.id}`}>
                     <li className='icon light-shadow'>

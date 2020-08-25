@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom'
 
 import Layout from '../components/Layout.jsx'
 import Navbar from '../components/Navbar.jsx'
+import Modal from '../static/Modal.jsx'
 import { Context } from '../../services/store.js'
 import ErrorPage from '../static/Error.jsx'
 import { updateUser, uploadPhoto } from '../../services/requests.js'
@@ -50,6 +51,18 @@ const Edit = (props) => {
 
     const handleLoadFile = (e) => {
         setProfilePicture(e.target.files[0])
+    }
+
+    const handleDeleteProfile = (e) => {
+        e.preventDefault()
+        const modal = document.querySelector('.modal')
+        modal.style.display = 'Block'
+    }
+
+    const deleteProfile = (e) => {
+        e.preventDefault()
+        const modal = document.querySelector('.modal')
+        modal.style.display = 'none'
     }
 
     const handleSubmitEdit = (e) => {
@@ -117,6 +130,14 @@ const Edit = (props) => {
         setCity(state.city)
     },[])
 
+    const modalHandlers = {
+        buttons:[{
+            label: "confirm",
+            action: deleteProfile
+        }],
+        closeBtn: true
+    }
+
     return(
         <Layout>
             <Navbar username={state.username}/>
@@ -178,10 +199,15 @@ const Edit = (props) => {
                             onClick={handleSubmitEdit}
                             className="button-secondary"
                         >Done!</button>
+                        <button
+                            onClick={handleDeleteProfile}
+                            className="button-secondary"
+                        >Cancel profile</button>
                     </div>
                 </form>
                 </div>
             : <ErrorPage error="not logged"/> }
+            <Modal handlers={modalHandlers} message="Do you wanna delete your profile?"/>
         </Layout>
     )
 }
