@@ -67,18 +67,18 @@ const Index = (props) => {
                 <label>Look for friends by name</label>
                 <input type="text" onChange={handleFindFriend} value={searchFriend}/>
             </div>
-            <ul>
+            <div className="friend-showcase">
             {
                 searchResult.length>0 ?
                     searchResult.map(res=>{
                         return(
-                            <li key={res._id}>
+                            <div key={res._id}>
                                 <FriendCard friend={res}/>
-                            </li>
+                            </div>
                         )
                     }) : <h3 className="flash">nothing found</h3>           
             }
-            </ul>
+            </div>
         </div> : <ErrorPage error="not logged"/>   
     }
         </Layout>

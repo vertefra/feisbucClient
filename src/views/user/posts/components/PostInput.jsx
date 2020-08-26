@@ -41,7 +41,7 @@ const PostInput = (props) => {
                 onChange={handleSetPost}
                 ></input>
             <button 
-                className="button-secondary light-back"
+                className="button-secondary light-back light-shadow"
                 onClick={handlePostSubmit}    
             >Add new post</button>
         </div>

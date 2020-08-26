@@ -116,9 +116,8 @@ const Show = (props) => {
                     */}
                             <figure>
                                 <img
+                                    id="main-profile-img"
                                     className="profile-pic dark-border" 
-                                    width={'100px'}
-                                    height={'100px'}
                                     src={profile_img} 
                                     alt="profile pic"
                                 />
@@ -131,7 +130,7 @@ const Show = (props) => {
                             
                             <button 
                                 onClick={handleEdit}
-                                className='button-secondary'
+                                className='button-secondary scale'
                             >
                                 <img
                                 className='dark-icon'

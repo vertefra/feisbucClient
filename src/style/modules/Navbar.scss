@@ -1,7 +1,7 @@
 @import '../Style.scss';
 
 .navbar{
-    width: 90%;
+    width: 100%;
     background-color: $dark;
     margin: 0 auto;
     position: relative;
@@ -16,11 +16,11 @@
 
 .navbar li{
     font-family: $roboto;
-    width: $sz-medium;
+    width: $sz-small;
     margin: $sp-small;
     border-radius: 5px;
     text-align: center;
-    font-size: $fsmall;
+    font-size: $fxsmall;
 }
 
 .icon {
@@ -62,5 +62,14 @@
 
     #logout-btn{
         padding: $sp-xsmall;
+    }
+
+    .navbar li{
+        width: $sz-large;
+        margin: $sp-medium;
+        padding: $sp-small $sp-medium;
+        border-radius: 5px;
+        text-align: center;
+        font-size: $fsmall;
     }
 }

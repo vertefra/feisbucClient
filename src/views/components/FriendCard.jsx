@@ -7,9 +7,9 @@ const FriendCard = (props) =>{
     return(
         <div className="card appear scale">
             <Link to={`/user/${id}`}>
-                <figure>
+                <figure id='friend-profile-pic'>
                     <img
-                        className="profile-pic " 
+                        className="profile-pic dark-border" 
                         src={friend.profile_img}
                         width='80px'
                         height="80px"

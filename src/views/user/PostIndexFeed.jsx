@@ -53,12 +53,14 @@ const PostIndexFeed = (props) => {
         {
             state.isLogged ? 
             <div className="profile-container appear">
-                <h1>here my feed</h1>
+                <h1 className="flash">Latest updates from your friends</h1>
+                <div className="post-showcase">
                 {
                     feed.map((thisPost, id)=>{
                         return <PostFeedShow key={id} post={thisPost} />
                     })
                 }
+                </div>
 
 
             </div> : <ErrorPage error="not logged"/>

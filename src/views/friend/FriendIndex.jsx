@@ -60,7 +60,7 @@ const FriendIndex = (props) => {
                 <h2 className="flash">you have {nOfFriends} friends</h2>
                 <div className="friend-showcase">
                 {friends.map(friend=>{
-                    return <FriendCard key={friend.id}friend={friend} />
+                    return <FriendCard key={friend.id} friend={friend} />
                 })}
                 </div>
             </div>

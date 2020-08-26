@@ -40,4 +40,20 @@
 }
 
 
+@media only screen and (min-width: 600px){
+
+    .form-field{
+        font-size: 27px;
+        margin-left: 200px;
+    }
+
+    .access-input{
+        width: $sz-xxlarge;
+        font-size: 22px;
+        height: 40px;
+    }
+
+}
+
+
 

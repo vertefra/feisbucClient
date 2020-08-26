@@ -9,9 +9,28 @@
     margin: $sp-small auto;
 }
 
+.profile-container figure {
+    background-color: white;
+    border-radius: 5px;
+    border-bottom: 4px $darker solid;
+    padding: $sp-small
+}
 
 
 .profile-ctr-btn{
     display: flex;
 }
 
+#main-profile-img{
+    width:150px;
+    height: 150px;
+    padding: $sp-xsmall;
+}
+
+@media only screen and (min-width: 600px){
+    
+    #main-profile-img{
+        width:180px;
+        height: 180px;
+    }
+}

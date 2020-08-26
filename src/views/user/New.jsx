@@ -6,7 +6,7 @@ const New = (props) => {
   return (
     <Layout>
         <header id='access-title'>
-          <h1 >Feisbuck <span id="tagline">where the food met the dreamers</span></h1>
+          <h1 >Feisbuck <span id="tagline">Just another (of many) work in progress</span></h1>
         </header>
         <Access/>
     </Layout>

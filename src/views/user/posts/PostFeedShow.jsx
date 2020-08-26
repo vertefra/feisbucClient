@@ -61,18 +61,20 @@ const PostFeedShow = (props) => {
         <div className="post light-back appear">
             <Link to={`/user/${owner_id}`}>
                 <header>
-                    
                         <img
+                        className="profile-pic dark-border"
+                        id = "feed-profile-pic"
                         src={profile_img}
                         width='80px'
                         />
-                    
                     <h5>{owner}</h5>
                 </header>
             </Link>
-            <p className="post-text-area">
-                {content}
-            </p>
+            <div className="content">
+                <p className="post-text-area">
+                    "{content}"
+                </p>
+            </div>
             <footer>
                 <button
                     id={_id}

@@ -3,3 +3,18 @@
 .search{
     padding: $sp-small;
 }
+
+
+
+@media only screen and (min-width: 600px) {
+    .search > label {
+        font-size: $flarge;
+    }
+    .search > input {
+        height: 30px;
+        width: 200px;
+    }
+    .search {
+        padding: $sp-large;
+    }
+}

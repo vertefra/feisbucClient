@@ -7,11 +7,10 @@
     margin: $sp-small;
     padding: $sp-small;
     font-family: $openSans;
-    min-height: $sz-medium;
+    min-height: $sz-large;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
 }
 
 // in PostShow
@@ -20,21 +19,47 @@
     padding: $sp-xsmall;
 }
 
+.post header {
+    background-color: $dark;
+    margin: 0 auto;
+    border-radius: 5px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $sp-small;
+    height: $sp-medium;
+    position: relative;
+    overflow: hidden;
+}
+
+.post h5 {
+    color: $light;
+    font-weight: 600;
+}
+
+#feed-profile-pic{
+    height: 50px;
+    width: 50px;
+}
+
 .post > footer {
     display: flex;
     justify-content: space-between;
     background-color: $orange;
-    padding: $sp-xsmall;
+    padding: $sp-small;
     border-bottom: 3px solid red;
     display: flex;
     align-items: center;
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 5px;
 }
 
 .date {
     font-family: $roboto;
     font-size: $fsmall;
 }
-
 
 .like-button {
     display: flex;
@@ -75,4 +100,51 @@
 .post-edit {
     background-color: white;
     border: 1px solid $orange;
+}
+
+
+
+@media only screen and (min-width: 600px){
+    .post {
+        margin: $sp-medium;
+        padding: $sp-large;
+        min-height: $sz-xlarge;
+    }
+
+    .post header {
+        width: 90%;
+        display: flex;
+        padding: $sp-medium;
+        height: 90px;
+    }
+
+    .post h5 {
+        color: $light;
+        font-weight: 600;
+        font-size: $flarge;
+    }
+
+    #feed-profile-pic{
+        width: 80px;
+        height: 80px;
+        border: 2px $light solid;
+    }
+
+    .content {
+        min-height: $sz-xlarge;
+        display: flex;
+        justify-content: center;
+        padding: $sp-medium;
+        font-size: $flarge;
+    }
+
+    .post > footer {
+        background-color: $orange;
+        padding: $sp-medium;
+        width: 90%;
+        border-bottom: 6px solid red;
+        display: flex;
+        align-items: center;
+    }
+
 }
