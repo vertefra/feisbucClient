@@ -58,7 +58,7 @@ const PostFeedShow = (props) => {
     } 
     
     return(
-        <div className="post light-back">
+        <div className="post light-back appear">
             <Link to={`/user/${owner_id}`}>
                 <header>
                     

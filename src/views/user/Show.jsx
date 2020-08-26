@@ -101,7 +101,7 @@ const Show = (props) => {
         <Layout>
             <Navbar></Navbar>
             {state.isLogged ? 
-            <div className="profile-container">
+            <div className="profile-container appear">
                 { redirect && <Redirect from='/user/:id' to={`${redirect}`}/> }
                 {/* <div className="profile-container"> */}
                     <header>

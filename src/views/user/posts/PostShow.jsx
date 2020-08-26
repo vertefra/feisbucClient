@@ -67,7 +67,7 @@ const PostShow = (props) => {
     }, [])
 
     return(
-        <div className='post light-back'>
+        <div className='post light-back appear'>
             <input
                 type="textarea"
                 value={postContent}

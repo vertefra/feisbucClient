@@ -10,7 +10,7 @@ import Navbar from '../components/Navbar.jsx'
 import Modal from '../static/Modal.jsx'
 import { Context } from '../../services/store.js'
 import ErrorPage from '../static/Error.jsx'
-import { updateUser, uploadPhoto } from '../../services/requests.js'
+import { updateUser, uploadPhoto, deleteUser } from '../../services/requests.js'
 import { requestUserInfo } from '../../services/requests.js'
 
 
@@ -53,16 +53,27 @@ const Edit = (props) => {
         setProfilePicture(e.target.files[0])
     }
 
-    const handleDeleteProfile = (e) => {
-        e.preventDefault()
-        const modal = document.querySelector('.modal')
-        modal.style.display = 'Block'
-    }
 
-    const deleteProfile = (e) => {
-        e.preventDefault()
+    // This activate the modal to confirm the action ========== //
+                                                                //
+    const handleDeleteProfile = (e) => {                        //
+        e.preventDefault()                                      //
+        const modal = document.querySelector('.modal')          //
+        modal.style.display = 'Block'                           //
+    }                                                           //
+                                                                //
+    // ======================================================== //
+
+    const deleteProfile = () => {
         const modal = document.querySelector('.modal')
         modal.style.display = 'none'
+        deleteUser(state.id, (err, data)=>{
+            if(data){
+                document.location.href="/"
+            } else {
+                console.log(err)
+            }
+        })
     }
 
     const handleSubmitEdit = (e) => {
@@ -109,6 +120,8 @@ const Edit = (props) => {
         }
     }
 
+    // THIS IS TO STAY LOGGED AFTER A RELOAD
+
     useEffect(()=>{
         if(state.isLogged===false){
             const userId = sessionStorage['user']
@@ -130,19 +143,25 @@ const Edit = (props) => {
         setCity(state.city)
     },[])
 
-    const modalHandlers = {
-        buttons:[{
-            label: "confirm",
-            action: deleteProfile
-        }],
-        closeBtn: true
-    }
+    // MODAL HANDLERS ============================= //
+                                                    //
+    const modalHandlers = {                         //
+        buttons:[{                                  //
+            label: "confirm",                       //
+            action: deleteProfile                   //
+        }],                                         //
+                                                    //
+        closeBtn: true                              //
+    }                                               //
+                                                    //
+    // ============================================ //
 
     return(
         <Layout>
             <Navbar username={state.username}/>
             { state.isLogged ?
-                <div className="profile-container">
+
+                <div className="profile-container appear">
                 
                 { redirect && <Redirect from='/user/:id' to={`${redirect}`}/> }
    

@@ -5,7 +5,7 @@ import Layout from '../components/Layout'
 import Navbar from '../components/Navbar'
 import { Context } from '../../services/store'
 import FriendCard from '../components/FriendCard'
-import { requestUserInfo } from '../../services/requests'
+import { requestUserInfo, cleanDeletedFriend } from '../../services/requests.js'
 
 // friend Index
 
@@ -40,6 +40,13 @@ const FriendIndex = (props) => {
             requestUserInfo(friendId, (err, friend)=>{
                 if(friend){
                     setFriends((old)=>[...old, friend])
+                } else {
+                    console.log('cannot get id ', friendId)
+                    // should make a better error response to verify that the problem
+                    // is really a deleter friend
+                    cleanDeletedFriend(state.id, friendId, (err, data)=>{
+                        console.log(data)
+                    })
                 }
             })
         }))

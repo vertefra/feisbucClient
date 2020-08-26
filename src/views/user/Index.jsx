@@ -62,7 +62,7 @@ const Index = (props) => {
         <Layout>
         <Navbar></Navbar>
         {state.isLogged ?
-        <div className="profile-container">
+        <div className="profile-container appear">
             <div className="form-field dark-border search">
                 <label>Look for friends by name</label>
                 <input type="text" onChange={handleFindFriend} value={searchFriend}/>

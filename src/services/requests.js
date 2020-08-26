@@ -5,7 +5,7 @@
 const dev = 'http://127.0.0.1:3001'
 const prod =  "https://feisbucserver.herokuapp.com"
 
-const server = dev
+const server = prod
 var bcrypt = require('bcryptjs');
 
 
@@ -45,6 +45,7 @@ const fetchPhotoAPI = async (endPoint, method, data) => {
 // USER REGISTRATION
 
 const registerUser = (username, password, cb) => {
+
     // ash the password
     // TODO: password restriction or verification function
 
@@ -67,9 +68,11 @@ const registerUser = (username, password, cb) => {
 }
 
 const userLogin = (username, password, cb) => {
+
     // request a user with same username. Ash the password, compare the password
     // return the cb function is the check is true with the user data
     // before, get rid of the password! :)
+
     fetchAPI(`/user?username=${username}`, "GET").then(data => {
         bcrypt.compare(password, data.password).then((res)=>{
             if(res){
@@ -100,6 +103,24 @@ const updateUser = (id, data, cb) => {
     }).catch(err=>{
         return cb(err, undefined)
     })
+}
+
+const deleteUser = (id, cb) => {
+    fetchAPI(`/user/${id}?clean=owner`, 'DELETE').then(data=>{
+        return cb(undefined, data)
+    }).catch(err=>{
+        return cb(err, undefined)
+    })
+}
+
+const cleanDeletedFriend = (ownerId, friendId, cb) => {
+    console.log(`cleaning id: ${friendId} from user: ${ownerId}`)
+    fetchAPI(`/user/${ownerId}?clean=${friendId}`, 'DELETE').then(data=>{
+        return cb(undefined, data)
+    }).catch(err=>{
+        return cb(err, undefined)
+    })
+
 }
 
 // FIND PARTIAL MATCHES
@@ -203,7 +224,9 @@ export {
     toggleLike,
     userLogin, 
     updateUser, 
-    requestMatchingUsers, 
+    requestMatchingUsers,
+    cleanDeletedFriend, 
     followUser, 
-    unfollowUser
+    unfollowUser,
+    deleteUser
 }

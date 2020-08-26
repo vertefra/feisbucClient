@@ -28,9 +28,10 @@ const Modal = (props) => {
                     }
                     {        
                         customHandlers.length > 0 &&
-                            customHandlers.map(handler=>{
+                            customHandlers.map((handler, id)=>{
                                 return(
                                     <button
+                                        key={id}
                                         className="button-secondary modal-button"
                                         onClick={handler.action}
                                     >

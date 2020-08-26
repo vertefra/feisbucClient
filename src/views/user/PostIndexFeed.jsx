@@ -45,24 +45,18 @@ const PostIndexFeed = (props) => {
     },[state.isLogged])
 
     useEffect(()=>{
-        if(feed){
-            console.log('feed ready', feed)
-        }
     },[feed])
-
-
 
     return(
         <Layout>
             <Navbar></Navbar>
         {
             state.isLogged ? 
-            <div className="profile-container">
+            <div className="profile-container appear">
                 <h1>here my feed</h1>
                 {
-                    feed.map(thisPost=>{
-                        console.log('post',thisPost)
-                        return <PostFeedShow post={thisPost} />
+                    feed.map((thisPost, id)=>{
+                        return <PostFeedShow key={id} post={thisPost} />
                     })
                 }
 
